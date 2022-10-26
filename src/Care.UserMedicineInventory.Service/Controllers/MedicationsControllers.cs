@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Care.UserMedicineInventory.Service.Controller
 {
-    //API controller attribute is to improve the rest api developer experience.
+    //API controller attribute is to improve the rest api developer experience
     [ApiController]
     //Route "https:localhost:5001/medications" will be handled by this controller.
     [Route("medicines")]
