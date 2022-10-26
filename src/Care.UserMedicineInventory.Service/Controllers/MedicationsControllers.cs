@@ -14,7 +14,7 @@ namespace Care.UserMedicineInventory.Service.Controller
     //Route "https:localhost:5001/medications" will be handled by this controller.
     [Route("medicines")]
     // each of the webapi controllers should be derived from ControllerBase.
-    // the ControllerBase provides many properties and methods for handling HTTP requests
+    // the ControllerBase provides many properties and methods for handling HTTP requests.
     public class MedicinesController : ControllerBase
     {
         private readonly IRepository<UserMedicineInventoryItem> userMedicineInventoryItemsRepository;
