@@ -1,3 +1,4 @@
+using Care.Common.MassTransit;
 using Care.Common.MongoDB;
 using Care.UserMedicineInventory.Service.Entities;
 using Microsoft.AspNetCore.Builder;
@@ -22,7 +23,9 @@ namespace Care.UserMedicineInventory.Service
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMongo()
-                    .AddRepository<UserMedicineInventoryItem>("usermedicineinventoryitems");
+                    .AddRepository<UserMedicineInventoryItem>("usermedicineinventoryitems")
+                    .AddRepository<MedicineItem>("medicineitems")
+                    .AddMassTransitWithRabbitMQ();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>

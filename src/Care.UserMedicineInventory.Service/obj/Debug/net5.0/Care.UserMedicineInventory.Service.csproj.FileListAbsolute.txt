@@ -46,3 +46,16 @@ C:\Users\victo\Downloads\PrototypeResearch\Care.UserMedicineInventory\src\Care.U
 C:\Users\victo\Downloads\PrototypeResearch\Care.UserMedicineInventory\src\Care.UserMedicineInventory.Service\obj\Debug\net5.0\ref\Care.UserMedicineInventory.Service.dll
 C:\Users\victo\Downloads\PrototypeResearch\Care.UserMedicineInventory\src\Care.UserMedicineInventory.Service\obj\Debug\net5.0\Care.UserMedicineInventory.Service.pdb
 C:\Users\victo\Downloads\PrototypeResearch\Care.UserMedicineInventory\src\Care.UserMedicineInventory.Service\obj\Debug\net5.0\Care.UserMedicineInventory.Service.genruntimeconfig.cache
+C:\Users\victo\Downloads\PrototypeResearch\Care.UserMedicineInventory\src\Care.UserMedicineInventory.Service\bin\Debug\net5.0\Automatonymous.dll
+C:\Users\victo\Downloads\PrototypeResearch\Care.UserMedicineInventory\src\Care.UserMedicineInventory.Service\bin\Debug\net5.0\Care.MedicineInventory.Contracts.dll
+C:\Users\victo\Downloads\PrototypeResearch\Care.UserMedicineInventory\src\Care.UserMedicineInventory.Service\bin\Debug\net5.0\GreenPipes.dll
+C:\Users\victo\Downloads\PrototypeResearch\Care.UserMedicineInventory\src\Care.UserMedicineInventory.Service\bin\Debug\net5.0\MassTransit.dll
+C:\Users\victo\Downloads\PrototypeResearch\Care.UserMedicineInventory\src\Care.UserMedicineInventory.Service\bin\Debug\net5.0\MassTransit.AspNetCoreIntegration.dll
+C:\Users\victo\Downloads\PrototypeResearch\Care.UserMedicineInventory\src\Care.UserMedicineInventory.Service\bin\Debug\net5.0\MassTransit.ExtensionsDependencyInjectionIntegration.dll
+C:\Users\victo\Downloads\PrototypeResearch\Care.UserMedicineInventory\src\Care.UserMedicineInventory.Service\bin\Debug\net5.0\MassTransit.RabbitMqTransport.dll
+C:\Users\victo\Downloads\PrototypeResearch\Care.UserMedicineInventory\src\Care.UserMedicineInventory.Service\bin\Debug\net5.0\Microsoft.Bcl.AsyncInterfaces.dll
+C:\Users\victo\Downloads\PrototypeResearch\Care.UserMedicineInventory\src\Care.UserMedicineInventory.Service\bin\Debug\net5.0\NewId.dll
+C:\Users\victo\Downloads\PrototypeResearch\Care.UserMedicineInventory\src\Care.UserMedicineInventory.Service\bin\Debug\net5.0\Newtonsoft.Json.dll
+C:\Users\victo\Downloads\PrototypeResearch\Care.UserMedicineInventory\src\Care.UserMedicineInventory.Service\bin\Debug\net5.0\Newtonsoft.Json.Bson.dll
+C:\Users\victo\Downloads\PrototypeResearch\Care.UserMedicineInventory\src\Care.UserMedicineInventory.Service\bin\Debug\net5.0\RabbitMQ.Client.dll
+C:\Users\victo\Downloads\PrototypeResearch\Care.UserMedicineInventory\src\Care.UserMedicineInventory.Service\bin\Debug\net5.0\System.Text.Json.dll

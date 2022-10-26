@@ -17,11 +17,13 @@ namespace Care.UserMedicineInventory.Service.Controller
     // the ControllerBase provides many properties and methods for handling HTTP requests
     public class MedicinesController : ControllerBase
     {
-        private readonly IRepository<UserMedicineInventoryItem> medicineRepository;
+        private readonly IRepository<UserMedicineInventoryItem> userMedicineInventoryItemsRepository;
+        private readonly IRepository<MedicineItem> medicineItemsRepository;
 
-        public MedicinesController(IRepository<UserMedicineInventoryItem> medicineRepository)
+        public MedicinesController(IRepository<UserMedicineInventoryItem> userMedicineInventoryItemsRepository, IRepository<MedicineItem> medicineItemsRepository)
         {
-            this.medicineRepository = medicineRepository;
+            this.userMedicineInventoryItemsRepository = userMedicineInventoryItemsRepository;
+            this.medicineItemsRepository = medicineItemsRepository;
         }
 
         // returns list of registered medications under a specific user
@@ -33,16 +35,25 @@ namespace Care.UserMedicineInventory.Service.Controller
                 return BadRequest();
             }
 
-            var medicines = (await medicineRepository.GetAllAsync(medicine => medicine.UserId == userId))
-                            .Select(medicine => medicine.AsDto());
-            return Ok(medicines);
+            var userMedicineInventoryItemEntities = await userMedicineInventoryItemsRepository.GetAllAsync(medicine => medicine.UserId == userId);
+            //gives a list of medicines that belong to a user
+            var medicineIds = userMedicineInventoryItemEntities.Select(medicine => medicine.MedicineId);
+            var medicineItemEntities = await medicineItemsRepository.GetAllAsync(medicine => medicineIds.Contains(medicine.Id));
+
+            var userMedicineInventoryItemDtos = userMedicineInventoryItemEntities.Select(userMedicineInventoryItem =>
+            {
+                var medicineItem = medicineItemEntities.Single(medicineItem => medicineItem.Id == userMedicineInventoryItem.MedicineId);
+                return userMedicineInventoryItem.AsDto(medicineItem.Name, medicineItem.Description);
+            });
+
+            return Ok(userMedicineInventoryItemDtos);
         }
 
         //creates medication
         [HttpPost]
         public async Task<ActionResult> PostAsync(AssignMedicineDto assignMedicineDto)
         {
-            var userMedicineInventoryItem = await medicineRepository.GetAsync(
+            var userMedicineInventoryItem = await userMedicineInventoryItemsRepository.GetAsync(
                 medicine => medicine.UserId == assignMedicineDto.UserId && medicine.MedicineId == assignMedicineDto.MedicineId);
 
             if (userMedicineInventoryItem == null)
@@ -57,7 +68,7 @@ namespace Care.UserMedicineInventory.Service.Controller
                     IntakeMinute = assignMedicineDto.IntakeMinute,
                 };
 
-                await medicineRepository.CreateAsync(userMedicineInventoryItem);
+                await userMedicineInventoryItemsRepository.CreateAsync(userMedicineInventoryItem);
             }
             return Ok();
         }
@@ -66,7 +77,7 @@ namespace Care.UserMedicineInventory.Service.Controller
         [HttpPut("{id}")]
         public async Task<IActionResult> PutAsync(Guid id, UpdateAssignMedicineDto updateAssignMedicineDto)
         {
-            var existingMedicine = await medicineRepository.GetAsync(id);
+            var existingMedicine = await userMedicineInventoryItemsRepository.GetAsync(id);
 
             if (existingMedicine == null)
             {
@@ -79,7 +90,7 @@ namespace Care.UserMedicineInventory.Service.Controller
             existingMedicine.IntakeHour = updateAssignMedicineDto.IntakeHour;
             existingMedicine.IntakeMinute = updateAssignMedicineDto.IntakeMinute;
 
-            await medicineRepository.UpdateAsync(existingMedicine);
+            await userMedicineInventoryItemsRepository.UpdateAsync(existingMedicine);
 
             return NoContent();
         }
@@ -88,14 +99,14 @@ namespace Care.UserMedicineInventory.Service.Controller
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteAsync(Guid id)
         {
-            var userMedicine = await medicineRepository.GetAsync(id);
+            var userMedicine = await userMedicineInventoryItemsRepository.GetAsync(id);
 
             if (userMedicine == null)
             {
                 return NotFound();
             }
 
-            await medicineRepository.RemoveAsync(userMedicine.Id);
+            await userMedicineInventoryItemsRepository.RemoveAsync(userMedicine.Id);
 
             return NoContent();
         }
