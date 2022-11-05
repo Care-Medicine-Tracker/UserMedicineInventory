@@ -12,6 +12,8 @@ namespace Care.UserMedicineInventory.Service
 {
     public class Startup
     {
+        //cors
+        private const string AllowedOriginSetting = "AllowedOrigin";
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -42,6 +44,14 @@ namespace Care.UserMedicineInventory.Service
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Care.UserMedicineInventory.Service v1"));
+
+                //cors
+                app.UseCors(builder =>
+                {
+                    builder.WithOrigins(Configuration[AllowedOriginSetting])
+                            .AllowAnyHeader()
+                            .AllowAnyMethod();
+                });
             }
 
             app.UseHttpsRedirection();

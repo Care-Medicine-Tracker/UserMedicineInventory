@@ -5,7 +5,6 @@ C:\Users\victo\Downloads\PrototypeResearch\Care.UserMedicineInventory\src\Care.U
 C:\Users\victo\Downloads\PrototypeResearch\Care.UserMedicineInventory\src\Care.UserMedicineInventory.Service\bin\Debug\net5.0\Care.UserMedicineInventory.Service.runtimeconfig.json
 C:\Users\victo\Downloads\PrototypeResearch\Care.UserMedicineInventory\src\Care.UserMedicineInventory.Service\bin\Debug\net5.0\Care.UserMedicineInventory.Service.runtimeconfig.dev.json
 C:\Users\victo\Downloads\PrototypeResearch\Care.UserMedicineInventory\src\Care.UserMedicineInventory.Service\bin\Debug\net5.0\Care.UserMedicineInventory.Service.dll
-C:\Users\victo\Downloads\PrototypeResearch\Care.UserMedicineInventory\src\Care.UserMedicineInventory.Service\bin\Debug\net5.0\ref\Care.UserMedicineInventory.Service.dll
 C:\Users\victo\Downloads\PrototypeResearch\Care.UserMedicineInventory\src\Care.UserMedicineInventory.Service\bin\Debug\net5.0\Care.UserMedicineInventory.Service.pdb
 C:\Users\victo\Downloads\PrototypeResearch\Care.UserMedicineInventory\src\Care.UserMedicineInventory.Service\bin\Debug\net5.0\Care.Common.dll
 C:\Users\victo\Downloads\PrototypeResearch\Care.UserMedicineInventory\src\Care.UserMedicineInventory.Service\bin\Debug\net5.0\DnsClient.dll
@@ -38,7 +37,6 @@ C:\Users\victo\Downloads\PrototypeResearch\Care.UserMedicineInventory\src\Care.U
 C:\Users\victo\Downloads\PrototypeResearch\Care.UserMedicineInventory\src\Care.UserMedicineInventory.Service\obj\Debug\net5.0\Care.UserMedicineInventory.Service.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\victo\Downloads\PrototypeResearch\Care.UserMedicineInventory\src\Care.UserMedicineInventory.Service\obj\Debug\net5.0\Care.UserMedicineInventory.Service.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\victo\Downloads\PrototypeResearch\Care.UserMedicineInventory\src\Care.UserMedicineInventory.Service\obj\Debug\net5.0\staticwebassets\Care.UserMedicineInventory.Service.StaticWebAssets.Manifest.cache
-C:\Users\victo\Downloads\PrototypeResearch\Care.UserMedicineInventory\src\Care.UserMedicineInventory.Service\obj\Debug\net5.0\staticwebassets\Care.UserMedicineInventory.Service.StaticWebAssets.xml
 C:\Users\victo\Downloads\PrototypeResearch\Care.UserMedicineInventory\src\Care.UserMedicineInventory.Service\obj\Debug\net5.0\scopedcss\bundle\Care.UserMedicineInventory.Service.styles.css
 C:\Users\victo\Downloads\PrototypeResearch\Care.UserMedicineInventory\src\Care.UserMedicineInventory.Service\obj\Debug\net5.0\Care.UserMedicineInventory.Service.RazorTargetAssemblyInfo.cache
 C:\Users\victo\Downloads\PrototypeResearch\Care.UserMedicineInventory\src\Care.UserMedicineInventory.Service\obj\Debug\net5.0\Care.UserMedicineInventory.Service.csproj.CopyComplete
@@ -59,3 +57,4 @@ C:\Users\victo\Downloads\PrototypeResearch\Care.UserMedicineInventory\src\Care.U
 C:\Users\victo\Downloads\PrototypeResearch\Care.UserMedicineInventory\src\Care.UserMedicineInventory.Service\bin\Debug\net5.0\Newtonsoft.Json.Bson.dll
 C:\Users\victo\Downloads\PrototypeResearch\Care.UserMedicineInventory\src\Care.UserMedicineInventory.Service\bin\Debug\net5.0\RabbitMQ.Client.dll
 C:\Users\victo\Downloads\PrototypeResearch\Care.UserMedicineInventory\src\Care.UserMedicineInventory.Service\bin\Debug\net5.0\System.Text.Json.dll
+C:\Users\victo\Downloads\PrototypeResearch\Care.UserMedicineInventory\src\Care.UserMedicineInventory.Service\obj\Debug\net5.0\refint\Care.UserMedicineInventory.Service.dll
