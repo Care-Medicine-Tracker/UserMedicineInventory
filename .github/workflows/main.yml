@@ -23,6 +23,6 @@ jobs:
         with:
           context: .
 #           file: ./Dockerfile
-          file: /src/Care.UserMedicineInventory.Service/Dockerfile
+          file: ./src/Care.UserMedicineInventory.Service/Dockerfile
           push: true
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/clockbox:latest
