@@ -58,3 +58,4 @@ C:\Users\victo\Downloads\PrototypeResearch\Care.UserMedicineInventory\src\Care.U
 C:\Users\victo\Downloads\PrototypeResearch\Care.UserMedicineInventory\src\Care.UserMedicineInventory.Service\bin\Debug\net5.0\RabbitMQ.Client.dll
 C:\Users\victo\Downloads\PrototypeResearch\Care.UserMedicineInventory\src\Care.UserMedicineInventory.Service\bin\Debug\net5.0\System.Text.Json.dll
 C:\Users\victo\Downloads\PrototypeResearch\Care.UserMedicineInventory\src\Care.UserMedicineInventory.Service\obj\Debug\net5.0\refint\Care.UserMedicineInventory.Service.dll
+C:\Users\victo\Downloads\PrototypeResearch\Care.UserMedicineInventory\src\Care.UserMedicineInventory.Service\bin\Debug\net5.0\appsettings.Staging.json
