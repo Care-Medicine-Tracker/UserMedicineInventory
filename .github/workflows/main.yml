@@ -22,6 +22,7 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           context: .
-          file: ./Dockerfile
+#           file: ./Dockerfile
+          file: /src/Care.UserMedicineInventory.Service/Dockerfile
           push: true
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/clockbox:latest
