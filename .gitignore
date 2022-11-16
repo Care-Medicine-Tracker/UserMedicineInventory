@@ -1,0 +1,5 @@
+src/Care.UserMedicineInventory.Service/bin/
+src/Care.UserMedicineInventory.Service/obj/
+.vs/
+.vscode/
+.idea
