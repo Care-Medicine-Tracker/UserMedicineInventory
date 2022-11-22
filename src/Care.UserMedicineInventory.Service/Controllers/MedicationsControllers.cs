@@ -27,14 +27,14 @@ namespace Care.UserMedicineInventory.Service.Controller
         }
 
         // returns list of registered medications under a specific user
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<UserMedicineInventoryDto>>> GetAsync(Guid userId)
+        [HttpGet("/users/{userId}")]
+        public async Task<ActionResult< IEnumerable<UserMedicineInventoryDto>>> GetAsync(Guid userId)
         {
             if (userId == Guid.Empty)
             {
                 return BadRequest();
             }
-
+ 
             var userMedicineInventoryItemEntities = await userMedicineInventoryItemsRepository.GetAllAsync(medicine => medicine.UserId == userId);
             //gives a list of medicines that belong to a user
             var medicineIds = userMedicineInventoryItemEntities.Select(medicine => medicine.MedicineId);
@@ -47,6 +47,21 @@ namespace Care.UserMedicineInventory.Service.Controller
             });
 
             return Ok(userMedicineInventoryItemDtos);
+        }
+
+
+        // returns list of user registered under a specific medication
+        [HttpGet("{medicineId}")]
+        public async Task<ActionResult<IEnumerable<UserMedicineInventoryDto>>> GetAsyncMedicineByUsers(Guid medicineId)
+        {
+            if (medicineId == Guid.Empty)
+            {
+                return BadRequest();
+            }
+
+            var userWithMedicineInventoryItemEntities = await userMedicineInventoryItemsRepository.GetAllAsync(users => users.MedicineId == medicineId);
+
+            return Ok(userWithMedicineInventoryItemEntities);
         }
 
         //creates medication

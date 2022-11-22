@@ -23,7 +23,6 @@ namespace Care.UserMedicineInventory.Service.Consumers
             var message = context.Message;
 
             var medicine = await repository.GetAsync(message.Id);
-            // var medicineUser = await userMedicineRepository.GetAsync(message.Id);
 
             if (medicine == null)
             {
@@ -32,10 +31,17 @@ namespace Care.UserMedicineInventory.Service.Consumers
             else
             {
                 await repository.RemoveAsync(message.Id);
-                // console.log(medicine);
+            }
 
-                // var medicine = await repository.GetAsync(message.Id);
-                // await userMedicineRepository.RemoveAsync()
+
+            if (medicine == null)
+            {
+                return;
+            }
+            else
+            {
+                var users = (await userMedicineRepository.GetAllAsync(userMedicine => userMedicine.MedicineId == medicine.Id));
+                await userMedicineRepository.GetAllRemoveAsync(userMedicine => userMedicine.MedicineId == medicine.Id);
             }
         }
     }

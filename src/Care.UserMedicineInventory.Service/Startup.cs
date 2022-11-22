@@ -1,5 +1,6 @@
 using Care.Common.MassTransit;
 using Care.Common.MongoDB;
+using Care.Common.Settings;
 using Care.UserMedicineInventory.Service.Entities;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -12,9 +13,10 @@ namespace Care.UserMedicineInventory.Service
 {
     public class Startup
     {
-        //cors
+        // AllowedOrigin = is locatec in appsettings.Development to remove Cors
         private const string AllowedOriginDevelopmentSetting = "AllowedOrigin";
         private const string AllowedOriginSetting = "AllowedHosts";
+        private ServiceSettings serviceSettings;
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -25,12 +27,17 @@ namespace Care.UserMedicineInventory.Service
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            serviceSettings = Configuration.GetSection(nameof(ServiceSettings)).Get<ServiceSettings>();
+
             services.AddMongo()
                     .AddRepository<UserMedicineInventoryItem>("usermedicineinventoryitems")
                     .AddRepository<MedicineItem>("medicineitems")
                     .AddMassTransitWithRabbitMQ();
 
-            services.AddControllers();
+            services.AddControllers(options =>
+            {
+                options.SuppressAsyncSuffixInActionNames = false;
+            });
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Care.UserMedicineInventory.Service", Version = "v1" });
@@ -54,10 +61,10 @@ namespace Care.UserMedicineInventory.Service
                 });
             }
 
-            app.UseHttpsRedirection();
-
+            // app.UseHttpsRedirection();
             app.UseRouting();
-
+            app.UseSwagger();
+            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Care.UserMedicineInventory.Service v1"));
             app.UseCors(builder =>
             {
                 builder.WithOrigins(Configuration[AllowedOriginSetting])
@@ -66,6 +73,7 @@ namespace Care.UserMedicineInventory.Service
             });
 
             app.UseAuthorization();
+            // app.UseDeveloperExceptionPage();
 
             app.UseEndpoints(endpoints =>
             {
