@@ -1,5 +1,5 @@
 using Care.UserMedicineInventory.Service.Dtos;
-using Care.UserMedicineInventory.Service.Entities;
+using Care.UserMedicineInventory.Service.Models;
 
 namespace Care.UserMedicineInventory.Service
 {
