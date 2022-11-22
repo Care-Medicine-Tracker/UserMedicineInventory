@@ -2,7 +2,7 @@ using System.Threading.Tasks;
 using Care.Common;
 using Care.MedicineInventory.Contracts;
 using MassTransit;
-using Care.UserMedicineInventory.Service.Entities;
+using Care.UserMedicineInventory.Service.Models;
 
 
 namespace Care.UserMedicineInventory.Service.Consumers

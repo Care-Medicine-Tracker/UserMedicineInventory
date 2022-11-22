@@ -4,7 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Care.Common;
 using Care.UserMedicineInventory.Service.Dtos;
-using Care.UserMedicineInventory.Service.Entities;
+using Care.UserMedicineInventory.Service.Interfaces;
+using Care.UserMedicineInventory.Service.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Care.UserMedicineInventory.Service.Controller
@@ -17,74 +18,50 @@ namespace Care.UserMedicineInventory.Service.Controller
     // the ControllerBase provides many properties and methods for handling HTTP requests.
     public class MedicinesController : ControllerBase
     {
-        private readonly IRepository<UserMedicineInventoryItem> userMedicineInventoryItemsRepository;
-        private readonly IRepository<MedicineItem> medicineItemsRepository;
+        private readonly IUserMedicineInventoryService _userMedicineInventoryService;
 
-        public MedicinesController(IRepository<UserMedicineInventoryItem> userMedicineInventoryItemsRepository, IRepository<MedicineItem> medicineItemsRepository)
+        public MedicinesController(IUserMedicineInventoryService userMedicineInventoryService)
         {
-            this.userMedicineInventoryItemsRepository = userMedicineInventoryItemsRepository;
-            this.medicineItemsRepository = medicineItemsRepository;
+            this._userMedicineInventoryService = userMedicineInventoryService;
         }
 
         // returns list of registered medications under a specific user
         [HttpGet("/users/{userId}")]
-        public async Task<ActionResult< IEnumerable<UserMedicineInventoryDto>>> GetAsync(Guid userId)
+        public async Task<ActionResult<IEnumerable<UserMedicineInventoryDto>>> GetAsync(Guid userId)
         {
             if (userId == Guid.Empty)
             {
                 return BadRequest();
             }
- 
-            var userMedicineInventoryItemEntities = await userMedicineInventoryItemsRepository.GetAllAsync(medicine => medicine.UserId == userId);
-            //gives a list of medicines that belong to a user
-            var medicineIds = userMedicineInventoryItemEntities.Select(medicine => medicine.MedicineId);
-            var medicineItemEntities = await medicineItemsRepository.GetAllAsync(medicine => medicineIds.Contains(medicine.Id));
 
-            var userMedicineInventoryItemDtos = userMedicineInventoryItemEntities.Select(userMedicineInventoryItem =>
-            {
-                var medicineItem = medicineItemEntities.Single(medicineItem => medicineItem.Id == userMedicineInventoryItem.MedicineId);
-                return userMedicineInventoryItem.AsDto(medicineItem.Name, medicineItem.Description);
-            });
+            var userMedicineInventory = await _userMedicineInventoryService.GetAsync(userId);
 
-            return Ok(userMedicineInventoryItemDtos);
+            return Ok(userMedicineInventory);
         }
 
 
         // returns list of user registered under a specific medication
         [HttpGet("{medicineId}")]
-        public async Task<ActionResult<IEnumerable<UserMedicineInventoryDto>>> GetAsyncMedicineByUsers(Guid medicineId)
+        public async Task<ActionResult<IEnumerable<UserMedicineInventoryDto>>> GetMedicineByUsersAsync(Guid medicineId)
         {
             if (medicineId == Guid.Empty)
             {
                 return BadRequest();
             }
 
-            var userWithMedicineInventoryItemEntities = await userMedicineInventoryItemsRepository.GetAllAsync(users => users.MedicineId == medicineId);
+            var userMedicineInventory = await _userMedicineInventoryService.GetMedicineByUsersAsync(medicineId);
 
-            return Ok(userWithMedicineInventoryItemEntities);
+            return Ok(userMedicineInventory);
         }
 
         //creates medication
         [HttpPost]
         public async Task<ActionResult> PostAsync(AssignMedicineDto assignMedicineDto)
         {
-            var userMedicineInventoryItem = await userMedicineInventoryItemsRepository.GetAsync(
-                medicine => medicine.UserId == assignMedicineDto.UserId && medicine.MedicineId == assignMedicineDto.MedicineId);
 
-            if (userMedicineInventoryItem == null)
-            {
-                userMedicineInventoryItem = new UserMedicineInventoryItem
-                {
-                    UserId = assignMedicineDto.UserId,
-                    MedicineId = assignMedicineDto.MedicineId,
-                    MeasurementType = assignMedicineDto.MeasurementType,
-                    DoseAmount = assignMedicineDto.DoseAmount,
-                    IntakeHour = assignMedicineDto.IntakeHour,
-                    IntakeMinute = assignMedicineDto.IntakeMinute,
-                };
+            var userMedicine = await _userMedicineInventoryService.PostAsync(assignMedicineDto);
+            if (userMedicine == null) return BadRequest();
 
-                await userMedicineInventoryItemsRepository.CreateAsync(userMedicineInventoryItem);
-            }
             return Ok();
         }
 
@@ -92,20 +69,8 @@ namespace Care.UserMedicineInventory.Service.Controller
         [HttpPut("{id}")]
         public async Task<IActionResult> PutAsync(Guid id, UpdateAssignMedicineDto updateAssignMedicineDto)
         {
-            var existingMedicine = await userMedicineInventoryItemsRepository.GetAsync(id);
-
-            if (existingMedicine == null)
-            {
-                return NotFound();
-            }
-
-            existingMedicine.MedicineId = updateAssignMedicineDto.MedicineId;
-            existingMedicine.MeasurementType = updateAssignMedicineDto.MeasurementType;
-            existingMedicine.DoseAmount = updateAssignMedicineDto.DoseAmount;
-            existingMedicine.IntakeHour = updateAssignMedicineDto.IntakeHour;
-            existingMedicine.IntakeMinute = updateAssignMedicineDto.IntakeMinute;
-
-            await userMedicineInventoryItemsRepository.UpdateAsync(existingMedicine);
+            var userMedicine = await _userMedicineInventoryService.PutAsync(id, updateAssignMedicineDto);
+            if (userMedicine == null) return NotFound();
 
             return NoContent();
         }
@@ -114,14 +79,9 @@ namespace Care.UserMedicineInventory.Service.Controller
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteAsync(Guid id)
         {
-            var userMedicine = await userMedicineInventoryItemsRepository.GetAsync(id);
+            var userMedicine = await _userMedicineInventoryService.DeleteAsync(id);
 
-            if (userMedicine == null)
-            {
-                return NotFound();
-            }
-
-            await userMedicineInventoryItemsRepository.RemoveAsync(userMedicine.Id);
+            if (userMedicine == null) return NotFound();
 
             return NoContent();
         }

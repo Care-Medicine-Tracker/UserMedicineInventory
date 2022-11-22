@@ -1,7 +1,9 @@
 using Care.Common.MassTransit;
 using Care.Common.MongoDB;
 using Care.Common.Settings;
-using Care.UserMedicineInventory.Service.Entities;
+using Care.UserMedicineInventory.Service.Interfaces;
+using Care.UserMedicineInventory.Service.Models;
+using Care.UserMedicineInventory.Service.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -33,6 +35,8 @@ namespace Care.UserMedicineInventory.Service
                     .AddRepository<UserMedicineInventoryItem>("usermedicineinventoryitems")
                     .AddRepository<MedicineItem>("medicineitems")
                     .AddMassTransitWithRabbitMQ();
+
+            services.AddSingleton<IUserMedicineInventoryService, UserMedicineInventoryService>();
 
             services.AddControllers(options =>
             {
