@@ -71,6 +71,7 @@ namespace Care.UserMedicineInventory.Service.Services
 
             if (existingMedicine == null) return null!;
 
+            existingMedicine.UserId = updateAssignMedicineDto.UserId;
             existingMedicine.MedicineId = updateAssignMedicineDto.MedicineId;
             existingMedicine.MeasurementType = updateAssignMedicineDto.MeasurementType;
             existingMedicine.DoseAmount = updateAssignMedicineDto.DoseAmount;

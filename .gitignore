@@ -3,3 +3,6 @@ src/Care.UserMedicineInventory.Service/obj/
 .vs/
 .vscode/
 .idea
+packages
+src/Tests/bin/
+src/Tests/obj/
