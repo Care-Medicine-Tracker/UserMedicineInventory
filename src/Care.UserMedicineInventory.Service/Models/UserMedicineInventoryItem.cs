@@ -21,10 +21,10 @@ namespace Care.UserMedicineInventory.Service.Models
         public int IntakeMinute { get; set; }
 
 
-        // public UserMedicineInventoryDto AsDto(this UserMedicineInventoryItem medicine, string name, string description)
-        // {
-        //     return new UserMedicineInventoryDto(medicine.Id, name, description, medicine.MedicineId, medicine.MeasurementType, medicine.DoseAmount, medicine.IntakeHour, medicine.IntakeMinute);
-        // }
+        public UserMedicineInventoryDto AsDto(UserMedicineInventoryItem medicine, string name, string description)
+        {
+            return new UserMedicineInventoryDto(medicine.Id, name, description, medicine.MedicineId, medicine.MeasurementType, medicine.DoseAmount, medicine.IntakeHour, medicine.IntakeMinute);
+        }
 
     }
 }
