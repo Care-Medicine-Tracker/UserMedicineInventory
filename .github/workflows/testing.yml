@@ -22,8 +22,7 @@ jobs:
 
     - name: Install dependencies
       run: dotnet restore
-#       working-directory: src/Care.UserMedicineInventory.Service
-      working-directory: UserMedicineInventory
+      working-directory: src/Care.UserMedicineInventory.Service
       
     - name: Build
       run: dotnet build --configuration Release --no-restore
@@ -37,7 +36,8 @@ jobs:
       with:
         name: user-medicine-inventory-artifact
 #         path: /home/runner/work/UserMedicineInventory/src/Care.UserMedicineInventory.Service/release/
-        path: /home/runner/work/UserMedicineInventory/UserMedicineInventory/src/Care.UserMedicineInventory.Service/release/
+#         path: /home/runner/work/UserMedicineInventory/UserMedicineInventory/src/Care.UserMedicineInventory.Service/release/
+        path: /home/runner/work/UserMedicineInventory/UserMedicineInventory/release/
 #         path: /home/runner/work/UserMedicineInventory/UserMedicineInventory/src/Care.UserMedicineInventory.Service/release/
 
   analyse:
