@@ -37,20 +37,20 @@ jobs:
         name: user-medicine-inventory-artifact
         path: /home/runner/work/UserMedicineInventory/src/Care.UserMedicineInventory.Service/Care.UserMedicineInventory.Service/release/
 
-  analyse:
-    name: Unit Tests
-    needs: [ build ]
-    runs-on: ubuntu-latest
+#   analyse:
+#     name: Unit Tests
+#     needs: [ build ]
+#     runs-on: ubuntu-latest
     
-    steps:
-      - uses: actions/checkout@v3
+#     steps:
+#       - uses: actions/checkout@v3
 
-      - name: Download workflow data
-        uses: actions/download-artifact@v3
-        with:
-          name: user-medicine-inventory-artifact
-          path: /home/runner/work/UserMedicineInventory/src/Care.UserMedicineInventory.Service/Care.UserMedicineInventory.Service/release/
+#       - name: Download workflow data
+#         uses: actions/download-artifact@v3
+#         with:
+#           name: user-medicine-inventory-artifact
+#           path: /home/runner/work/UserMedicineInventory/src/Care.UserMedicineInventory.Service/Care.UserMedicineInventory.Service/release/
       
-      - name: Test
-        run: dotnet test --no-restore --verbosity normal
-        working-directory: Tests
+#       - name: Test
+#         run: dotnet test --no-restore --verbosity normal
+#         working-directory: Tests
