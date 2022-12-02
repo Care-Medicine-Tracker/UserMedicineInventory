@@ -22,7 +22,7 @@ jobs:
 
     - name: Install dependencies
       run: dotnet restore
-      working-directory: UserMedicineInventory
+      working-directory: src/Care.UserMedicineInventory.Service
       
     - name: Build
       run: dotnet build --configuration Release --no-restore
