@@ -36,7 +36,7 @@ jobs:
       with:
         name: user-medicine-inventory-artifact
 #         path: /home/runner/work/UserMedicineInventory/src/Care.UserMedicineInventory.Service/release/
-        path: UserMedicineInventory\src\Care.UserMedicineInventory.Service\release\
+        path: /home/runner/work/UserMedicineInventory/UserMedicineInventory/release/
 #         path: /home/runner/work/UserMedicineInventory/UserMedicineInventory/src/Care.UserMedicineInventory.Service/release/
 
   analyse:
