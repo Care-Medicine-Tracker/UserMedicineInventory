@@ -51,8 +51,7 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: user-medicine-inventory-artifact
-#           path: /home/runner/work/UserMedicineInventory/src/Care.UserMedicineInventory.Service/release/
-          path: \home\runner\work\UserMedicineInventory\src\Care.UserMedicineInventory.Service\release\
+          path: /home/runner/work/UserMedicineInventory/UserMedicineInventory/release/
       
       - name: Test
         run: dotnet test --no-restore --verbosity normal
