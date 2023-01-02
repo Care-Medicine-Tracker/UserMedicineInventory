@@ -9,12 +9,12 @@ namespace Tests.Controller;
 public class FeedbackControllerTests
 {
     private readonly Mock<IUserMedicineInventoryService> _mockService;
-    
+
     public FeedbackControllerTests()
     {
         _mockService = new Mock<IUserMedicineInventoryService>();
     }
-    
+
     // Get All Feedback by specific Patient - Happy Flow 
     [Fact]
     public void GetAsync_ReturnsAllMedicineByUser()
@@ -60,52 +60,6 @@ public class FeedbackControllerTests
         var returnValue = Assert.IsType<List<UserMedicineInventoryDto>>(actionResult.Value);
         Assert.Empty(returnValue);
     }
-    
-    // Get All Feedback by specific Patient - Happy Flow 
-    [Fact]
-    public void GetPatientFeedbackById_ReturnsAllFeedbackByPatient()
-    {
-        // Arrange
-        Guid testSessionGuid = new Guid("62FA647C-AD54-4BCC-A860-E5A2664B019D");
-
-        _mockService.Setup(service => service.GetMedicineByUsersAsync(testSessionGuid))
-            .ReturnsAsync(GetPatientFeedbacksById(testSessionGuid));
-
-        var controller = new MedicinesController(_mockService.Object);
-
-        // Act
-        var result = controller.GetMedicineByUsersAsync(testSessionGuid);
-
-        // Assert
-        var task = Assert.IsType<Task<ActionResult<IEnumerable<UserMedicineInventoryDto>>>>(result);
-        var okResult = Assert.IsType<OkObjectResult>(task.Result.Result);
-        var returnValue = Assert.IsType<List<UserMedicineInventoryDto>>(okResult.Value);
-        Assert.NotEmpty(returnValue);
-        var feedback = returnValue.FirstOrDefault();
-        Assert.Equal(new Guid("62FA647C-AD54-4BCC-A860-E5A2664B0123"), feedback!.Id);
-        // Assert.Equal("Hello World", feedback!.Comment);
-    }
-
-    // All Feedback by specific Patient - Sad Flow 
-    [Fact]
-    public void GetPatientFeedbackById_ReturnsNoFeedbackByPatient_WhenNoFeedbackFound()
-    {
-        // Arrange
-        Guid testSessionGuid = new Guid("62FA647C-AD54-4BCC-A860-E5A2664B04DA");
-        _mockService.Setup(service => service.GetMedicineByUsersAsync(testSessionGuid))
-            .ReturnsAsync(new List<UserMedicineInventoryDto>());
-
-        var controller = new MedicinesController(_mockService.Object);
-
-        // Act
-        var result = controller.GetMedicineByUsersAsync(testSessionGuid);
-
-        // Assert
-        var task = Assert.IsType<Task<ActionResult<IEnumerable<UserMedicineInventoryDto>>>>(result);
-        var actionResult = Assert.IsType<OkObjectResult>(task.Result.Result);
-        var returnValue = Assert.IsType<List<UserMedicineInventoryDto>>(actionResult.Value);
-        Assert.Empty(returnValue);
-    }
 
     // Create a Feedback for specific Patient and checks if a new feedback has been created- Happy Flow 
     [Fact]
@@ -131,7 +85,7 @@ public class FeedbackControllerTests
         var task = Assert.IsType<Task<ActionResult>>(result);
         Assert.IsType<OkResult>(task.Result);
     }
-  
+
     // Create a Feedback for specific Patient and checks what occurs when a feedback can not be made- Sad Flow 
     [Fact]
     public void CreateFeedback_ReturnsNewlyCreatedFeedback_ReturnsBadRequest_WhenFeedbackCanNotBeMade()
@@ -178,7 +132,7 @@ public class FeedbackControllerTests
         var task = Assert.IsType<Task<IActionResult>>(result);
         Assert.IsType<NoContentResult>(task.Result);
     }
-    
+
     // Updates a Feedback with wrong values and checks if the controller handles the error- Sad Flow 
     [Fact]
     public void UpdateFeedback_ReturnsNotFound_WhenFeedbackNotFound()
@@ -189,7 +143,7 @@ public class FeedbackControllerTests
             .ReturnsAsync((UserMedicineInventoryItem)null!);
 
         var controller = new MedicinesController(_mockService.Object);
-        UpdateAssignMedicineDto updateAssignMedicineDto = new UpdateAssignMedicineDto(new Guid(), new Guid(), "", 0,0, 0);
+        UpdateAssignMedicineDto updateAssignMedicineDto = new UpdateAssignMedicineDto(new Guid(), new Guid(), "", 0, 0, 0);
 
         // Act
         var result = controller.PutAsync(testSessionGuid, updateAssignMedicineDto);
@@ -218,7 +172,7 @@ public class FeedbackControllerTests
         Assert.IsType<NoContentResult>(task.Result);
     }
 
-    
+
     // Delete a Feedback with wrong values and checks if the controller handles the error- Sad Flow 
     [Fact]
     public void DeleteFeedback_ReturnsNotFound_WhenFeedbackNotFound()

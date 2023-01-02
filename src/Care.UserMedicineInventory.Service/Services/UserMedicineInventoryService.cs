@@ -36,13 +36,6 @@ namespace Care.UserMedicineInventory.Service.Services
             return userMedicineInventoryItemDtos;
         }
 
-        public async Task<IEnumerable<UserMedicineInventoryDto>> GetMedicineByUsersAsync(Guid medicineId)
-        {
-            var userWithMedicineInventoryItemEntities = await userMedicineInventoryItemsRepository.GetAllAsync(users => users.MedicineId == medicineId);
-
-            return ((IEnumerable<UserMedicineInventoryDto>)userWithMedicineInventoryItemEntities);
-        }
-
         public async Task<UserMedicineInventoryItem> PostAsync(AssignMedicineDto assignMedicineDto)
         {
             var userMedicineInventoryItem = await userMedicineInventoryItemsRepository.GetAsync(
