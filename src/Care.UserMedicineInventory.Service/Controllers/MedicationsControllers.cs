@@ -12,8 +12,7 @@ namespace Care.UserMedicineInventory.Service.Controller
 {
     //API controller attribute is to improve the rest api developer experience.
     [ApiController]
-    //Route "https:localhost:5001/medications" will be handled by this controller.
-    [Route("users")]
+    [Route("prescription")]
     // each of the webapi controllers should be derived from ControllerBase.
     // the ControllerBase provides many properties and methods for handling HTTP requests.
     public class MedicinesController : ControllerBase
@@ -26,7 +25,7 @@ namespace Care.UserMedicineInventory.Service.Controller
         }
 
         // returns list of registered medications under a specific user
-        [HttpGet("{userId}")]
+        [HttpGet("user/{userId}")]
         public async Task<ActionResult<IEnumerable<UserMedicineInventoryDto>>> GetAsync(Guid userId)
         {
             if (userId == Guid.Empty)
@@ -35,21 +34,6 @@ namespace Care.UserMedicineInventory.Service.Controller
             }
 
             var userMedicineInventory = await _userMedicineInventoryService.GetAsync(userId);
-
-            return Ok(userMedicineInventory);
-        }
-
-
-        // returns list of user registered under a specific medication
-        [HttpGet("medicine/{medicineId}")]
-        public async Task<ActionResult<IEnumerable<UserMedicineInventoryDto>>> GetMedicineByUsersAsync(Guid medicineId)
-        {
-            if (medicineId == Guid.Empty)
-            {
-                return BadRequest();
-            }
-
-            var userMedicineInventory = await _userMedicineInventoryService.GetMedicineByUsersAsync(medicineId);
 
             return Ok(userMedicineInventory);
         }
