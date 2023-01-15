@@ -46,7 +46,7 @@ The build steps for running the service with the mongo database on Docker.
  
 5.  The project is now running locally and should be able to be found at https://localhost:5005. 
 
-![Screenshot (1414)](https://user-images.githubusercontent.com/78371221/209119018-271e6929-beca-44ba-b4fc-5994f98d4f6b.png)
+![image](https://user-images.githubusercontent.com/78371221/212545164-01c614bd-c9a0-459c-b1c8-e350442b72f3.png)
 <b><i>Image 6: Swagger page of the User Medicine Inventory service</i></b>
  
 6.  To be able to see the endpoints we can use Swagger by adding "/swagger/index.html" to the url. Example "https://localhost:5005/swagger/index.html" as shown in image
