@@ -50,12 +50,35 @@ jobs:
         with:
           name: user-medicine-inventory-artifact
           path: /home/runner/work/UserMedicineInventory/UserMedicineInventory/src/Care.UserMedicineInventory.Service/release/
-          
       
       - name: Test
         run: dotnet test --no-restore --verbosity normal
         working-directory: src/Tests
+              
+      - name: Persist workflow data as artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: user-medicine-inventory-artifact
+          path: /home/runner/work/UserMedicineInventory/UserMedicineInventory/release/
+    
+  docker:
+  
+    name: Docker Build
+    needs: [ analyse ]
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v3
 
+      - name: Download workflow data
+        uses: actions/download-artifact@v3
+        with:
+          name: user-medicine-inventory-artifact
+          path: /home/runner/work/UserMedicineInventory/UserMedicineInventory/src/Care.UserMedicineInventory.Service/release/
+          
+      - name: Build the Docker image
+        working-directory: src/Care.UserMedicineInventory.Service
+        run: docker build . --file Dockerfile --tag care-user-medicine-inventory
 
   sonarcloud:
     name: SonarCloud
