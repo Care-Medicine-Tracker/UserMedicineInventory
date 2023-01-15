@@ -111,18 +111,13 @@ jobs:
           name: user-medicine-inventory-artifact
           path: /home/runner/work/UserMedicineInventory/UserMedicineInventory/release/
         
-        
-        
-        
-        
-        
   codeql-analysis:
     name: CodeQL
     needs: [ build ]
     runs-on: ubuntu-latest
 
     strategy:
-      fail-fast: false
+#       fail-fast: false
       matrix:
         language: ['csharp']
     
