@@ -82,7 +82,6 @@ jobs:
         
   security-code-scan:
     name: Security Code Scan
-    needs: [ analyse ]
     runs-on: ubuntu-latest
     
     steps:
