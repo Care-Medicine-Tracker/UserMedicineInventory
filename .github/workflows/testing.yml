@@ -78,10 +78,16 @@ jobs:
       - name: Build the Docker image
         working-directory: src/Care.UserMedicineInventory.Service
         run: docker build . --file Dockerfile --tag care-user-medicine-inventory
-        
+              
+      - name: Persist workflow data as artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: user-medicine-inventory-artifact
+          path: /home/runner/work/UserMedicineInventory/UserMedicineInventory/release/
         
   security-code-scan:
     name: Security Code Scan
+    needs: [ build ]
     runs-on: ubuntu-latest
     
     steps:
