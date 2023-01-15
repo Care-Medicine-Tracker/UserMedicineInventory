@@ -2,7 +2,7 @@
  ## Introduction
  The User Medicine Inventory Service is in charge of all registered medicines belonging to users to the Care web-application. This service manages adding, updating, and removing users information regarding their medicines they take from the system. For more information regarding the project and the architecture can it be found at **[Medicine-Tracker](https://github.com/vcaf/Medicine-Tracker)** repository. 
 
-This readme file will cover the endpoints of the service and running the service with its database on docker.
+This readme file will cover the endpoints of the service, running the service locally with its database on docker and building the docker image.
 
 ## Endpoints
 ![image](https://user-images.githubusercontent.com/78371221/212545101-2d182194-d102-486d-9e07-cb894a7696fc.png)
@@ -50,3 +50,9 @@ The build steps for running the service with the mongo database on Docker.
 <b><i>Image 6: Swagger page of the User Medicine Inventory service</i></b>
  
 6.  To be able to see the endpoints we can use Swagger by adding "/swagger/index.html" to the url. Example "https://localhost:5005/swagger/index.html" as shown in image
+
+## Building the image locally
+ 
+1.  locate to the folder where the image is stored.
+2. run the command <pre><code>docker build -t image_name .</code></pre>
+3. the container should now be running
